@@ -1,0 +1,21 @@
+{
+  "name": "mean",
+  "version": "0.0.1",
+  "description": "My first MEAN Application",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "MongoDB",
+    "Express",
+    "AngularJS",
+    "Node.js"
+  ],
+  "author": "Sean Lawrenz",
+  "license": "MIT",
+  "devDependencies": {
+    "express": "^4.14.1",
+    "gulp": "^3.9.1"
+  }
+}
