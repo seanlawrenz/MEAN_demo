@@ -1,10 +1,8 @@
-var connect = require('connect');
-var app = connect();
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-var helloWorld= (req,res,next)=>{
-	res.setHeader('Content-Type', 'text/plain');
-	res.end('Hello World');
-}
-app.use(helloWorld);
+var express = require('./config/express');
+
+var app = express();
 app.listen(3000);
-console.log('Server running at http://localhost:3000/');
+module.exports = app;
+ console.log('Server running at http://localhost:3000');
