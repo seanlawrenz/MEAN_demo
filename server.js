@@ -1,13 +1,18 @@
 'use strict';
 
-var http = require('http');
+//Declaring Development enviorment
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-http.createServer(function(req,res){
-	res.writeHead(200, {
-		'Content-Type': 'text/plain'
-	});
-	res.write('Hello World')
-	res.end();
-}).listen(3000);
+//Load Express
+var express = require('./config/express');
+
+//New instance of Express
+var app = express();
+
+//Server port 300
+app.listen(3000);
+
+//Express application instance for external usage
+module.exports = app;
 
 console.log('Server running at http://localhost:3000/');
