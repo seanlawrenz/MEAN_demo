@@ -7,7 +7,9 @@
    	  compress = require('compression'),
  	bodyParser = require('body-parser'),
  	   session = require('express-session'),
-methodOverride = require('method-override');
+methodOverride = require('method-override'),
+		 flash = require('connect-flash'),
+	  passport = require('passport');
 
 //Grabbing the controller index nameing it app so express is now app
 module.exports = function(){
@@ -39,12 +41,18 @@ module.exports = function(){
 		secret: config.sessionSecret
 	}));
 
+	app.use(flash());
+	app.use(passport.initialize());
+	app.use(passport.session());
+
 	//VIEWS
 	app.set('views', './app/views');
 	app.set('view engine', 'ejs');
 
 	// Load the 'index' routing file
 	require('../app/routes/index.server.routes.js')(app);
+	//Load the 'users' routing file
+	require('../app/routes/users.server.routes.js')(app);
 
 	//Load static files
 	app.use(express.static('./public'));

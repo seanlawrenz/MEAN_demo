@@ -1,0 +1,17 @@
+1st:
+mongodb/bin ./mongod
+
+2nd 
+mongodb/bin ./mongo
+
+
+curl -X POST -H "Content-Type: application/json" -d '{"firstName":"First","lastName":"Last","email":"user@example.com","password":"password"}' localhost:3000/users
+
+curl -X POST -H "Content-Type: application/json" -d '{"firstName":"Test","lastName":"Test","email":"user@example.com","password":"password"}' localhost:3000/users
+
+curl -X PUT -H "Content-Type: application/json" -d '{"lastName":"Updated"}' localhost:3000/users/58e40944f3eb143cc2a631f2
+curl -X PUT -H "Content-type: application/json" -d '{"lastName":"Updated"}'localhost:3000/users/58e40944f3eb143cc2a631f2
+
+curl -X DELETE localhost:3000/users/58e40944f3eb143cc2a631f2
+
+curl -X POST -H "Content-Type: application/json" -d '{"firstName":"First","lastName":"Last","email":"user@example.com","password":"password"}' localhost:3000/users
