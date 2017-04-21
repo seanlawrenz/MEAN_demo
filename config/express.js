@@ -53,6 +53,8 @@ module.exports = function(){
 	require('../app/routes/index.server.routes.js')(app);
 	//Load the 'users' routing file
 	require('../app/routes/users.server.routes.js')(app);
+	//Load the 'articles' routing file
+	require('../app/routes/articles.server.routes.js')(app);
 
 	//Load static files
 	app.use(express.static('./public'));

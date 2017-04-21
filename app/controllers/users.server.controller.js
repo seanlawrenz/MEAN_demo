@@ -120,3 +120,13 @@ exports.signout = function(req,res){
 	req.logout();
 	res.redirect('/');
 };
+
+//Authentication for users to CRUD
+exports.requiresLogin = function(req,res,next){
+	if(!req.isAuthenticated()){
+		return res.status(401).send({
+			message: 'User is not logged in'
+		});
+	}
+	next();
+};
