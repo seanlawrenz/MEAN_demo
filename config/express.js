@@ -2,18 +2,23 @@
 
 //Requirement modules
    var  config = require('./config'),
+   		  http = require('http'),
    	   express = require('express'),
+   	  socketio = require('socket.io'),
 	 	morgan = require('morgan'),
    	  compress = require('compression'),
  	bodyParser = require('body-parser'),
  	   session = require('express-session'),
+ 	MongoStore = require('connect-mongo')(session),
 methodOverride = require('method-override'),
 		 flash = require('connect-flash'),
 	  passport = require('passport');
 
 //Grabbing the controller index nameing it app so express is now app
-module.exports = function(){
+module.exports = function(db){
 	var app = express();
+	var server = http.createServer(app);
+	var io = socketio.listen(server);
 	
 	//Development status. Prod or development
 	if(process.env.NODE_ENV === 'development'){
@@ -29,10 +34,23 @@ module.exports = function(){
 		extended: true
 	}));
 
+	var mongoStore = new MongoStore({
+            mongooseConnection: db.connection,
+            collection: config.sessionCollection
+        });
+
 	//Formats data to be in JSON
 	app.use(bodyParser.json());
 	//For PUT and DELETE requests
 	app.use(methodOverride());
+
+	//Bridge between Express and connect-mongo
+	app.use(session({
+		saveUninitialized: true,
+		resave: true,
+		secret: config.sessionSecret,
+		store: mongoStore
+	}));
 
 	//Session handler
 	app.use(session({
@@ -59,5 +77,8 @@ module.exports = function(){
 	//Load static files
 	app.use(express.static('./public'));
 
-	return app;
+	//Socket Session return
+	require('./socketio')(server,io,mongoStore);
+
+	return server;
 };

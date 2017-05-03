@@ -2,7 +2,7 @@
 
 var mainApplicationModuleName = 'mean';
 
-var mainApplicationModule = angular.module(mainApplicationModuleName, ['ngResource','ngRoute','users','example','articles']);
+var mainApplicationModule = angular.module(mainApplicationModuleName, ['ngResource','ngRoute','users','example','articles','chat']);
 
 //Hashbangs for SEO
 mainApplicationModule.config(['$locationProvider',

@@ -10,8 +10,8 @@ var mongoose = require('./config/mongoose'),
 
 //New instance of Mongoose
 var db = mongoose();
-//New instance of Express
-var app = express();
+//New instance of Express and passing the database into it
+var app = express(db);
 //New instance of Passport
 var passport = passport();
 
